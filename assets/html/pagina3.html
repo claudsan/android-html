@@ -1,0 +1,51 @@
+<html ng-app="app">
+	<head>
+<!-- 		<script src="../js/angular.min.js"></script> -->
+<!-- 		<script src="../js/angular-route.min.js"></script> -->
+<!-- 		<link rel="stylesheet"href="../css/bootstrap.min.css" /> -->
+		
+		<script src="file:///android_asset/js/angular.min.js"></script>
+		<script src="file:///android_asset/js/angular-route.min.js"></script>
+		<link rel="stylesheet"href="file:///android_asset/css/bootstrap.min.css" />
+		
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="-1" />
+		<meta http-equiv="pragma" content="no-cache" />
+		
+		<script type="text/javascript">
+		var app = angular.module('app', []);
+
+		app.controller('contatosCtrl', function ($scope) {
+		
+		    $scope.nomes = JSON.parse(localStorage.getItem('nomesInfo')) || [];
+		    
+		    $scope.remove = function(cadastro){
+		    	var index = $scope.nomes.indexOf(cadastro);
+  				$scope.nomes.splice(index, 1); 
+  				localStorage.setItem('nomesInfo', JSON.stringify($scope.nomes));
+		    };
+		});
+		
+		</script>
+	</head>
+	<body ng-controller="contatosCtrl">
+		<h1>App HTML (Listagem)</h1>
+		<div>
+			<strong>Qtd nomes: {{nomes.length}}</strong>
+			<ul class="list-group">
+			  <li class="list-group-item clearfix" ng-repeat="cadastro in nomes">
+			    {{cadastro.nome}}
+			    <button class="btn btn-danger btn-xs pull-right" ng-click="remove(cadastro)">DEL</button>
+				<span class="label label-primary pull-right" style="margin-right:5px">{{cadastro.nascimento | date : "dd/MM/yyyy"}}</span>
+			  </li>
+			</ul>
+			<div ng-show="nomes == []">Nenhum registro</div>
+		</div>
+		<a href="file:///android_asset/html/index.html"  class="btn btn-warning">Voltar</a>
+	</body>
+</html>

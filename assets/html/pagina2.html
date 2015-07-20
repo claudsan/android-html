@@ -1,0 +1,54 @@
+<html ng-app="app">
+	<head>
+<!-- 		<script src="../js/angular.min.js"></script> -->
+<!-- 		<script src="../js/angular-route.min.js"></script> -->
+<!-- 		<link rel="stylesheet"href="../css/bootstrap.min.css" /> -->
+		
+		<script src="file:///android_asset/js/angular.min.js"></script>
+		<script src="file:///android_asset/js/angular-route.min.js"></script>
+		<link rel="stylesheet"href="file:///android_asset/css/bootstrap.min.css" />
+		
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<script type="text/javascript">
+		var app = angular.module('app', []);
+
+		app.controller('contatosCtrl', function ($scope) {
+		
+		    $scope.nomes = JSON.parse(localStorage.getItem('nomesInfo')) || [];
+			$scope.nome = "";
+			$scope.nascimento = null;
+			
+			$scope.salvar = function () {
+			    $scope.nomes.push({nome: $scope.nome, nascimento:$scope.nascimento});
+			    localStorage.setItem('nomesInfo', JSON.stringify($scope.nomes));
+			    $scope.nome = "";
+				$scope.nascimento = null;
+			};
+			
+		});
+		
+		</script>
+	</head>
+	<body ng-controller="contatosCtrl">
+		<h1>App HTML (Cadastro)</h1>
+		<div>
+			<form>
+			  <div class="form-group">
+			    <label for="exampleInputEmail1">Nome</label>
+			    <input type="text" ng-model="nome" class="form-control" id="nome" placeholder="Nome">
+			  </div>
+			  <div class="form-group">
+			    <label for="exampleInputPassword1">Data Nascimento</label>
+			    <input type="date" ng-model="nascimento" class="form-control" id="data" placeholder="Data">
+			  </div>
+			    <a href="#" ng-click="salvar()" class="btn btn-success">Salvar</a>
+			    <a href="file:///android_asset/html/index.html"  class="btn btn-warning">Voltar</a>
+			</form>
+			
+			Qtd nomes: {{nomes.length}}
+		</div>
+	</body>
+</html>

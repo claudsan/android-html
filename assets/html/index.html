@@ -1,0 +1,29 @@
+<html ng-app="app">
+	<head>
+		<script src="file:///android_asset/js/angular.min.js"></script>
+		<script src="file:///android_asset/js/angular-route.min.js"></script>
+		<link rel="stylesheet"href="file:///android_asset/css/bootstrap.min.css" />
+		
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<script type="text/javascript">
+		var app = angular.module('app', []);
+
+		app.controller('contatosCtrl', function ($scope) {
+		
+			$scope.dataAtual = new Date().getTime();
+			
+		});
+		
+		</script>		
+	</head>
+	<body ng-controller="contatosCtrl">
+		<h1>App HTML</h1>
+		<div>
+		    <a href="file:///android_asset/html/pagina2.html?{{dataAtual}}"  class="btn btn-success">Cadastros</a>
+		    <a href="file:///android_asset/html/pagina3.html?{{dataAtual}}"  class="btn btn-info">Listagem</a>
+		</div>
+	</body>
+</html>
